@@ -8,29 +8,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.min.js"></script>
 
-    <link rel="stylesheet" href="styles.css">
+  <!-- <link rel="stylesheet" href="styles.css"> -->
 
 </head>
 
 <body>
 
-    <form id="chat" action="">
+    <img id="imageBase64"/>
+    <!-- <form id="chat" >
+        <img id="imageBase64" style="width: 300px" />
         <input type="text" name="username" placeholder="Digite seu usario">
         <div class="messages">
+
+            <img id="imageBase64" style="height:100%" />
         </div>
 
         <input type="text" name="message" placeholder="Digite sua mensagem">
         <button type="submit">Enviar</button>
 
 
-    </form>
+    </form> -->
+
+    
+
+
+
 
     <script>
-        var socket = io('http://localhost:3000')
+        var socket = io('http://192.168.1.228:3000')
 
         function renderMessage(message) {
-            $('.messages').append('<div class="message"><strong>' + message.author + '</strong>: ' + message.message + '</div>')
-
+           // $('.messages').append('<div class="message"><strong>' + message.author + '</strong>: ' + message.message + '</div>')
+            document.getElementById("imageBase64").src = `data:image/jpg;base64,${message.message}`
+            document.getElementById("imageBase64").height = message.height,
+            document.getElementById("imageBase64").width = message.width
+            console.log(message)
 
         }
         socket.on('previousMessage', function (messages) {
